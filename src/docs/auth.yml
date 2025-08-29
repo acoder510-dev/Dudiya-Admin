@@ -1,0 +1,161 @@
+paths:
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      operationId: login
+      summary: Login patient/doctor.
+      produces:
+        - application/json
+      requestBody:
+        description: Log in request body.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Login"
+      responses:
+        "200":
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Logged in successfully.
+        "500":
+          description: 500 Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Something went wrong. Please try again.
+
+  /auth/verify-otp:
+    post:
+      tags:
+        - Auth
+      operationId: verify-otp
+      summary: Verify otp patient/doctor.
+      produces:
+        - application/json
+      requestBody:
+        description: VerifyOtp in request body.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VerifyOtp"
+      responses:
+        "200":
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Otp Verified in successfully.
+        "500":
+          description: 500 Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Something went wrong. Please try again.
+
+  /auth/resend-otp:
+    post:
+      tags:
+        - Auth
+      operationId: resend-otp
+      summary: Resend otp patient/doctor.
+      produces:
+        - application/json
+      requestBody:
+        description: ResendOtp in request body.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResendOtp"
+      responses:
+        "200":
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Resend Otp Verified in successfully.
+        "500":
+          description: 500 Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Something went wrong. Please try again.
+
+components:
+  schemas:
+    Login:
+      properties:
+        email:
+          type: string
+        role:
+          type: string
+
+      required:
+        - email
+
+    VerifyOtp:
+      properties:
+        email:
+          type: string
+        role:
+          type: string
+        otp:
+          type: Number
+
+      required:
+        - email
+
+    ResendOtp:
+      properties:
+        email:
+          type: string
+
+      required:
+        - email

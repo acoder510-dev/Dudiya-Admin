@@ -1,0 +1,2344 @@
+paths:
+# ==================== Admin Auth ===========
+  /admin/auth/register:
+    post:
+      tags:
+        - Admin Auth
+      operationId: Admin-Register
+      summary: Register for admin.
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        "200":
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Otp Verified in successfully.
+        "500":
+          description: 500 Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Something went wrong. Please try again.
+  
+  /admin/auth/login:
+    post:
+      tags:
+        - Admin Auth
+      operationId: Admin-login
+      summary: Login Admin.
+      
+      
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+        
+      responses:
+        "200":
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Logged in successfully.
+        "500":
+          description: 500 Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Something went wrong. Please try again.
+ 
+  /admin/auth/verify-otp:
+    post:
+      tags:
+        - Admin Auth
+      operationId: Admin-verify-otp
+      summary: Verify otp admin.
+      produces:
+        - application/json
+      requestBody:
+        description: VerifyOtp in request body.
+        
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                otp:
+                  type: string
+      responses:
+        "200":
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Otp Verified in successfully.
+        "500":
+          description: 500 Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Something went wrong. Please try again.
+
+  /admin/auth/forget-password:
+    post:
+      tags:
+        - Admin Auth
+      operationId: Admin-Forget-password
+      summary: forget password admin.
+      produces:
+        - application/json
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                
+      responses:
+        "200":
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Otp Verified in successfully.
+        "500":
+          description: 500 Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Something went wrong. Please try again.
+  
+  /admin/auth/update-password:
+    post:
+      tags:
+        - Admin Auth
+      operationId: Admin-Update-Password
+      summary: Update-Password.
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                currentPassword:
+                  type: string
+                newPassword:
+                  type: string
+                confirmPassword:
+                  type: string
+                type:
+                   type: string
+                   enum:
+                    - 'update'
+                    - 'forget'
+                   default: 'forget'
+                    
+      responses:
+        "200":
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Otp Verified in successfully.
+        "500":
+          description: 500 Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Something went wrong. Please try again.
+  
+  /admin/auth/profile:
+    get:
+      tags:
+        - Admin Auth
+      operationId: AdmingetProfile
+      summary: Admin Get Profile.
+      
+      
+      
+       
+      responses:
+        "200":
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Logged in successfully.
+        "500":
+          description: 500 Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Something went wrong. Please try again.
+ 
+  /admin/auth/refresh:
+    post:
+      tags:
+        - Admin Auth
+      operationId: Admin-refresh
+      summary: refresh token admin.
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                refreshToken:
+                  type: string
+                
+      
+      
+     
+      
+                       
+      responses:
+        "200":
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Otp Verified in successfully.
+        "500":
+          description: 500 Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Something went wrong. Please try again.
+  
+  /admin/auth/logout:
+    get:
+      tags:
+        - Admin Auth
+      operationId: AdminlogOut
+      summary: Admin log out.
+
+      responses:
+        "200":
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Otp Verified in successfully.
+
+#===================== Admin Dashboards =================
+  /admin/dashboard/get:
+      get:
+        tags:
+          - Admin Dashboard
+        operationId: dashboard
+        summary: Admin Dashboard
+        produces:
+            - application/json
+        responses:
+         "200":
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Otp Verified in successfully.
+        "500":
+          description: 500 Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Something went wrong. Please try again.
+  
+  /admin/dashboard/recent-doctor:
+      get:
+        tags:
+          - Admin Dashboard
+        operationId: dashboardDoctor
+        summary: Admin Dashboard RecentDoctor
+        produces:
+            - application/json
+        responses:
+         "200":
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Otp Verified in successfully.
+        "500":
+          description: 500 Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Something went wrong. Please try again.
+  
+  /admin/dashboard/recent-patient:
+      get:
+        tags:
+          - Admin Dashboard
+        operationId: dashboardPatient
+        summary: Admin Dashboard RecentPatient
+        produces:
+            - application/json
+        responses:
+         "200":
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Otp Verified in successfully.
+        "500":
+          description: 500 Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Something went wrong. Please try again.
+  
+#===================== Admin Patient =================
+  /admin/patient/get/{id}:
+    get:
+      tags:
+        -  Admin Patient
+      operationId: patientbyid
+      summary: Admin Patient.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Otp Verified in successfully.
+        "500":
+          description: 500 Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Something went wrong. Please try again.
+  
+  /admin/patient/get:
+      get:
+        tags:
+          - Admin Patient
+        operationId: Patient
+        summary: Admin Patients
+        produces:
+            - application/json
+        parameters: [
+                             {
+                            name: "search",
+                            in: "query",
+                            description: "Search values that need to be considered for filter",
+                             
+                             },
+                             {
+                                 name: "item",
+                                 in: "query",
+                                 description: "item values that need to be considered for filter",
+                                  
+                                  },
+                                  {
+                                 name: "pages",
+                                 in: "query",
+                                 description: "pages values that need to be considered for filter",
+                                  
+                                  }
+                          ]
+        
+        responses:
+         "200":
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Otp Verified in successfully.
+         "500":
+          description: 500 Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Something went wrong. Please try again.
+  
+  /admin/patient/add:
+    post:
+      tags:
+       - Admin Patient
+      operationId: Patientadd
+      summary: Patient Admin.
+      produces:
+        - application/json
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                fullName:
+                  type: string
+                email:
+                   type: string
+                mobileNo:
+                   type: string
+                gender:
+                   type: string
+                dob:
+                   type: string
+                accountNumber:
+                   type: string
+
+      responses:
+        "200":
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Otp Verified in successfully.
+        "500":
+          description: 500 Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Something went wrong. Please try again.
+  
+  /admin/patient/delete/{id}:
+    delete:
+      tags:
+        -  Admin Patient
+      operationId: patientdelete
+      summary: Admin Patient.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Otp Verified in successfully.
+        "500":
+          description: 500 Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Something went wrong. Please try again.
+  
+  /admin/patient/edit/{id}:
+    put:
+      tags:
+       - Admin Patient
+      operationId: patientedit
+      summary: Manage Speciality Admin.
+      produces:
+        - application/json
+      parameters:
+          - in: path
+            name: id
+            required: true
+            schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                fullName:
+                  type: string
+                email:
+                   type: string
+                mobileNo:
+                   type: string
+                gender:
+                   type: string
+                dob:
+                   type: string
+                
+        
+      responses:
+        "200":
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Otp Verified in successfully.
+        "500":
+          description: 500 Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Something went wrong. Please try again.
+  
+#===================== Admin Doctor =================
+  /admin/doctor/get/{id}:
+    get:
+      tags:
+        -  Admin Doctor
+      operationId: doctorgetById
+      summary: Admin docter get By id.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Otp Verified in successfully.
+        "500":
+          description: 500 Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Something went wrong. Please try again.
+  
+  /admin/doctor/get:
+      get:
+        tags:
+          - Admin Doctor
+        operationId: Doctor
+        summary: Admin End Doctor Get
+        produces:
+            - application/json
+        parameters: [
+                             {
+                            name: "search",
+                            in: "query",
+                            description: "Search values that need to be considered for filter",
+                             
+                             },
+                             {
+                                 name: "item",
+                                 in: "query",
+                                 description: "item values that need to be considered for filter",
+                                  
+                                  },
+                                  {
+                                 name: "pages",
+                                 in: "query",
+                                 description: "pages values that need to be considered for filter",
+                                  
+                                  }
+                          ]
+        responses:
+         "200":
+           description: 200 OK
+           content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Otp Verified in successfully.
+         "500":
+          description: 500 Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Something went wrong. Please try again.
+  /admin/doctor/add:
+    post:
+      tags:
+       - Admin Doctor
+      operationId: doctoradd
+      summary: Admin End Doctor Add.
+      produces:
+        - application/json
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                fullName:
+                  type: string
+                email:
+                   type: string
+                mobileNo:
+                   type: string
+                gender:
+                   type: string
+                dob:
+                   type: string
+                accountNumber:
+                   type: string
+      
+      responses:
+        "200":
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Otp Verified in successfully.
+        "500":
+          description: 500 Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Something went wrong. Please try again.
+  
+  /admin/doctor/delete/{id}:
+    delete:
+      tags:
+        -  Admin Doctor
+      operationId: doctordelete
+      summary: Admin End Doctor delete.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Otp Verified in successfully.
+        "500":
+          description: 500 Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Something went wrong. Please try again.
+  
+  /admin/doctor/edit/{id}:
+    put:
+      tags:
+       - Admin Doctor
+      operationId: doctoredit
+      summary: Admin End Doctor Edit.
+      produces:
+        - application/json
+      parameters:
+          - in: path
+            name: id
+            required: true
+            schema:
+            type: string
+
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                fullName:
+                  type: string
+                email:
+                   type: string
+                mobileNo:
+                   type: string
+                gender:
+                   type: string
+                dob:
+                   type: string
+                
+      
+      
+      responses:
+        "200":
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Otp Verified in successfully.
+        "500":
+          description: 500 Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Something went wrong. Please try again.
+  
+#===================== Admin Revenue =================
+  /admin/revenue/get:
+      get:
+        tags:
+          - Admin Revenue
+        operationId: Revenue
+        summary: Admin Revenue
+        produces:
+            - application/json
+        responses:
+         "200":
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Otp Verified in successfully.
+         "500":
+          description: 500 Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Something went wrong. Please try again.
+  
+
+#===================== Admin Booking =================
+  /admin/booking/get:
+      get:
+        tags:
+          - Admin Booking
+        operationId: ABooking
+        summary: Admin Booking
+        produces:
+            - application/json
+        responses:
+         "200":
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Otp Verified in successfully.
+         "500":
+          description: 500 Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Something went wrong. Please try again.
+ 
+   #===================== Admin Manage Subscription =================
+  
+  #===================== Admin Manage Subscription =================
+  
+  /admin/manage-subscription/get:
+      get:
+        tags:
+          - Admin Manage Subscription
+        operationId: ManageSubscription
+        summary: Admin Manage Subscription
+        produces:
+            - application/json
+        parameters: [
+                      {
+                     name: "search",
+                     in: "query",
+                     description: "Search values that need to be considered for filter",
+                      
+                      },
+                     {
+                     name: "item",
+                     in: "query",
+                     description: "pages values that need to be considered for filter",
+                      
+                      },
+                      {
+                     name: "pages",
+                     in: "query",
+                     description: "pages values that need to be considered for filter",
+                      
+                      }
+                    ]
+         
+         
+         
+      
+        responses:
+         "200":
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Otp Verified in successfully.
+         "500":
+          description: 500 Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Something went wrong. Please try again.
+ 
+  /admin/manage-subscription/add:
+    post:
+      tags:
+       - Admin Manage Subscription
+      operationId: manageSubscriptionadd
+      summary: Admin End Doctor Add.
+      produces:
+        - application/json
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                planName:
+                  type: string
+                createdFor:
+                   type: string
+                   enum: ['Doctor','Patient']
+                   default: 'Doctor'
+                planDuration:
+                   type: string
+                publish:
+                   type: string
+                   format: date
+                
+                description: 
+                   type: string
+                status:
+                   type: string
+                   enum:
+                    - 'Active'
+                    - 'Inactive'
+                    - 'Draft'
+                   default: 'Active'
+                  
+                   
+               
+            
+      responses:
+        "200":
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Otp Verified in successfully.
+        "500":
+          description: 500 Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Something went wrong. Please try again.
+  
+  /admin/manage-subscription/delete/{id}:
+    delete:
+      tags:
+        -  Admin Manage Subscription
+      operationId: manageSubscriptiondelete
+      summary: Admin End Doctor delete.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Otp Verified in successfully.
+        "500":
+          description: 500 Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Something went wrong. Please try again.
+  
+  /admin/manage-subscription/delete-many:
+    post:
+      tags:
+        -  Admin Manage Subscription
+      operationId: manageSubscriptiondeletemany
+      summary: Admin End Doctor delete.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ids:
+                  type: array
+                  items:
+                    type: string
+                  description: Array of IDs to update
+              required:
+                - ids
+      responses:
+        "200":
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Otp Verified in successfully.
+        "500":
+          description: 500 Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Something went wrong. Please try again.
+  
+  /admin/manage-subscription/edit/{id}:
+    put:
+      tags:
+       - Admin Manage Subscription
+      operationId: manageSubscriptiondit
+      summary: Admin End Doctor Edit.
+      produces:
+        - application/json
+      parameters:
+          - in: path
+            name: id
+            required: true
+            schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                planName:
+                  type: string
+                createdFor:
+                   type: string
+                planDuration:
+                   type: string
+                publish:
+                   type: string
+                   format: date
+                description: 
+                   type: string
+                status:
+                   type: string
+                   enum:
+                    - 'Active'
+                    - 'Inactive'
+                    - 'Draft'
+                   default: 'Active'
+                
+      responses:
+        "200":
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Otp Verified in successfully.
+        "500":
+          description: 500 Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Something went wrong. Please try again.
+  /admin/manage-subscription/get/{id}:
+    get:
+      tags:
+        -   Admin Manage Subscription
+      operationId: subscriptiongetById
+      summary: Admin Manage Subscription get By id.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Otp Verified in successfully.
+        "500":
+          description: 500 Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Something went wrong. Please try again.
+  
+ 
+  #===================== Admin Notifications =================
+  /admin/notifications/get:
+      get:
+        tags:
+          - Admin Notifications
+        operationId: Notifications
+        summary: Admin Notifications
+        produces:
+            - application/json
+        parameters: [
+                        {
+                       name: "search",
+                       in: "query",
+                       description: "Search values that need to be considered for filter",
+                        
+                        },
+                       {
+                       name: "item",
+                       in: "query",
+                       description: "pages values that need to be considered for filter",
+                        
+                        },
+                        {
+                       name: "pages",
+                       in: "query",
+                       description: "Skip values that need to be considered for filter",
+                        
+                        }
+                    ]
+         
+         
+      
+        responses:
+         "200":
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Otp Verified in successfully.
+         "500":
+          description: 500 Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Something went wrong. Please try again.
+
+
+  #====================== Admin Manage Speciality ===============
+  /admin/speciality/add:
+    post:
+      tags:
+       - Admin Manage Speciality
+      operationId: specialityadd
+      summary: Manage Speciality Admin.
+      produces:
+        - application/json
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                icon:
+                  type: string
+                name:
+                   type: string
+                status:
+                   type: string
+                   enum:
+                    - 'Active'
+                    - 'Inactive'
+                   default: 'Active'
+                
+
+                  
+      responses:
+        "200":
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Otp Verified in successfully.
+        "500":
+          description: 500 Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Something went wrong. Please try again.
+  
+  /admin/speciality/delete/{id}:
+    delete:
+      tags:
+        - Admin Manage Speciality
+      operationId: specialitydelete
+      summary: Manage Speciality Admin.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Otp Verified in successfully.
+        "500":
+          description: 500 Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Something went wrong. Please try again.
+  
+  /admin/speciality/delete-many:
+    post:
+      tags:
+        -  Admin Manage Speciality
+      operationId: specialitydeletemany
+      summary: Admin End Speciality delete.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ids:
+                  type: array
+                  items:
+                    type: string
+                  description: Array of IDs to update
+              required:
+                - ids
+      responses:
+        "200":
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Otp Verified in successfully.
+        "500":
+          description: 500 Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Something went wrong. Please try again.
+  
+  /admin/speciality/edit/{id}:
+    put:
+      tags:
+       - Admin Manage Speciality
+      operationId: specialityput
+      summary: Manage Speciality Admin.
+      produces:
+        - application/json
+      parameters:
+          - in: path
+            name: id
+            required: true
+            schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                icon:
+                  type: string
+                name:
+                   type: string
+                status:
+                   type: string
+                   enum:
+                    - 'Active'
+                    - 'Inactive'
+                   default: 'Active'
+      
+      responses:
+        "200":
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Otp Verified in successfully.
+        "500":
+          description: 500 Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Something went wrong. Please try again.
+  /admin/speciality/get/{id}:
+    get:
+      tags:
+        -   Admin Manage Speciality
+      operationId: specialityById
+      summary: Admin Manage Speciality get By id.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Otp Verified in successfully.
+        "500":
+          description: 500 Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Something went wrong. Please try again.
+    
+
+  
+ 
+  #===================== Admin Settings =================
+  /admin/settings/get:
+      get:
+        tags:
+          - Admin Settings
+        operationId: Settings
+        summary: Admin Settings
+        produces:
+            - application/json
+        responses:
+         "200":
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Otp Verified in successfully.
+         "500":
+          description: 500 Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Something went wrong. Please try again.
+
+#===================== Admin Paypal =================
+  /admin/paypal/add:
+    post:
+      tags:
+       - Admin Paypal
+      operationId: Paypaladd
+      summary: Manage Speciality Admin.
+      produces:
+        - application/json
+      requestBody:
+        description: Speciality in request body.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/speciality"
+      responses:
+        "200":
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Otp Verified in successfully.
+        "500":
+          description: 500 Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Something went wrong. Please try again.
+  
+  /admin/paypal/delete/{id}:
+    delete:
+      tags:
+        - Admin Paypal
+      operationId: Paypaldelete
+      summary: Manage Speciality Admin.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Otp Verified in successfully.
+        "500":
+          description: 500 Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Something went wrong. Please try again.
+  
+  /admin/paypal/edit:
+    put:
+      tags:
+       - Admin Paypal
+      operationId: Paypalput
+      summary: Manage Speciality Admin.
+      produces:
+        - application/json
+      requestBody:
+        description: Speciality in request body.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/specialitys"
+      responses:
+        "200":
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Otp Verified in successfully.
+        "500":
+          description: 500 Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Something went wrong. Please try again.
+  
+  /admin/paypal/get:
+    get:
+      tags:
+       - Admin Paypal
+      operationId: Paypalget
+      summary: Manage Speciality Admin.
+      produces:
+        - application/json
+      parameters: [
+                    {
+                   name: "search",
+                   in: "query",
+                   description: "Search values that need to be considered for filter",
+                    
+                    },
+                   {
+                   name: "item",
+                   in: "query",
+                   description: "pages values that need to be considered for filter",
+                    
+                    },
+                    {
+                   name: "pages",
+                   in: "query",
+                   description: "Skip values that need to be considered for filter",
+                    
+                    }]
+         
+         
+         
+      
+                    
+                      
+      responses:
+        "200":
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Otp Verified in successfully.
+        "500":
+          description: 500 Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Something went wrong. Please try again.
+ 
+
+  #===================== Admin Static Content ================= 
+  /admin/static/edit:
+    put:
+      tags:
+       - Admin Static Content
+      operationId: staticput
+      summary: Admin Static Content.
+      produces:
+        - application/json
+      parameters: [
+                    {
+                   name: "key",
+                   in: "query",
+                   description: "key values that need to be considered for filter",
+                    
+                    }
+                   
+                    
+                    ]
+      requestBody:
+        description: Speciality in request body.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/staticContent"
+      responses:
+        "200":
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Otp Verified in successfully.
+        "500":
+          description: 500 Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Something went wrong. Please try again.
+  
+  /admin/static/get:
+    get:
+      tags:
+       - Admin Static Content
+      operationId: Staticget
+      summary: Admin Static Content .
+      produces:
+        - application/json
+      parameters: [{
+        
+                   name: "key",
+                   in: "query",
+                   description: "key values get values in admin static content",
+                    }]
+                    
+                      
+      responses:
+        "200":
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Otp Verified in successfully.
+        "500":
+          description: 500 Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Something went wrong. Please try again.
+  
+#==========================Public API========================
+/upload:
+    post:
+      tags:
+       - Public API
+      operationId: Upload Images
+      summary:  Upload Images .
+      produces:
+        - application/json
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+
+                    
+                      
+      responses:
+        "200":
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Otp Verified in successfully.
+        "500":
+          description: 500 Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Something went wrong. Please try again.
+
+/public/get-speciality:
+    get:
+      tags:
+       - Public API
+      operationId: Aspecialityget
+      summary: Manage Speciality Admin.
+      produces:
+        - application/json
+      parameters: [
+                {
+               name: "search",
+               in: "query",
+               description: "Search values that need to be considered for filter",
+                
+                },
+               {
+               name: "item",
+               in: "query",
+               description: "pages values that need to be considered for filter",
+                
+                },
+                {
+               name: "pages",
+               in: "query",
+               description: "Skip values that need to be considered for filter",
+                
+                }]
+         
+         
+         
+      
+                    
+                      
+      responses:
+        "200":
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Otp Verified in successfully.
+        "500":
+          description: 500 Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Something went wrong. Please try again.
+ 
+/public/education-types:
+    get:
+      tags:
+       - Public API
+      operationId: getEduction-type
+      summary: Manage Speciality Admin.
+      produces:
+        - application/json
+      parameters: [
+                {
+               name: "search",
+               in: "query",
+               description: "Search values that need to be considered for filter",
+                
+                },
+               {
+               name: "item",
+               in: "query",
+               description: "pages values that need to be considered for filter",
+                
+                },
+                {
+               name: "pages",
+               in: "query",
+               description: "Skip values that need to be considered for filter",
+                
+                }]
+         
+         
+         
+      
+                    
+                      
+      responses:
+        "200":
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Otp Verified in successfully.
+        "500":
+          description: 500 Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Something went wrong. Please try again.
+
+/public/get-location:
+    get:
+      tags:
+       - Public API
+      operationId: getLocation-type
+      summary: Manage Speciality Admin.
+      produces:
+        - application/json
+      parameters: [
+                {
+               name: "search",
+               in: "query",
+               description: "Search values that need to be considered for filter",
+                
+                },
+               {
+               name: "item",
+               in: "query",
+               description: "pages values that need to be considered for filter",
+                
+                },
+                {
+               name: "pages",
+               in: "query",
+               description: "Skip values that need to be considered for filter",
+                
+                }]
+         
+         
+         
+      
+                    
+                      
+      responses:
+        "200":
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Otp Verified in successfully.
+        "500":
+          description: 500 Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Something went wrong. Please try again.
+
+
+#===================== Admin Subscription =================
+/subscription/get:
+      get:
+        tags:
+          - Subscription
+        operationId: Subscription
+        summary: Admin Settings
+        produces:
+            - application/json
+        responses:
+         "200":
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Otp Verified in successfully.
+         "500":
+          description: 500 Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Something went wrong. Please try again.
+
+/subscription/get/{id}:
+    get:
+      tags:
+        -   Subscription
+      operationId: subscriptiongetsById
+      summary: Admin Manage Subscription get By id.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Otp Verified in successfully.
+        "500":
+          description: 500 Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: true or false.
+                  message:
+                    type: string
+                    description: Something went wrong. Please try again.
+  
+ 
+# ========================== End Admin Section =========================
+
+
+components:
+  schemas:
+   
+        # ================= Start Admin Section =================
+    
+   
+   
+    staticContent:
+        properties:
+          title:
+            type: string
+          description:
+            type: string
+        
+    
+  
+    
+    
+    
+    
+    
+
+           
+          
